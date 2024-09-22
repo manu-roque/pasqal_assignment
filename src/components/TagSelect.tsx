@@ -60,26 +60,26 @@ const TagSelect: React.FC<TagSelectProps> = ({
 
   return (
     <div className="custom-dropdown" ref={dropdownRef}>
-    	<label htmlFor="itemsDropdown">Label:</label>
+    	<label htmlFor="itemsDropdown" className="label-text">Label:</label>
       	<div className="dropdown-wrapper" onClick={toggleDropdown}>
 			<div className="selected-item">
-			{highlightedTagItems.length > 0 ? (
-				<div className="tags-container">
-					{highlightedTagItems.map(item => (
-						<span key={item.id} className="tag">
-							{item.name}
-							<button className="remove-btn" onClick={(e) => {
-								e.stopPropagation();
-								handleRemoveItem(item.id);
-							}}>
-								&times;
-							</button>
-						</span>
-					))}
-				</div>
-			) : (
-				<span className="placeholder">Select an item</span>
-			)}
+				{highlightedTagItems.length > 0 ? (
+					<div className="tags-container">
+						{highlightedTagItems.map(item => (
+							<span key={item.id} className="tag">
+								{item.name}
+								<button className="remove-btn" onClick={(e) => {
+									e.stopPropagation();
+									handleRemoveItem(item.id);
+								}}>
+									&times;
+								</button>
+							</span>
+						))}
+					</div>
+					) : (
+					<span className="placeholder">Select an item</span>
+				)}
 			</div>
 			{isOpen && (
 				<div className="dropdown-menu">

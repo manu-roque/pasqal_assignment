@@ -58,13 +58,13 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
 
     return (
         <div className="custom-dropdown" ref={dropdownRef}>
-            <label htmlFor="itemsDropdown">Label:</label>
+            <label htmlFor="itemsDropdown" className='label-text'>Label:</label>
             <div className="dropdown-wrapper" onClick={toggleDropdown}>
                 <div className="selected-item">
                     {selectedItem ? (
-                    <span>{selectedItem.name}</span>
-                    ) : (
-                    <span>Select an item</span>
+                        <span>{selectedItem.name}</span>
+                        ) : (
+                        <span>Select an item</span>
                     )}
                 </div>
                 {isOpen && (
