@@ -40,65 +40,65 @@ const TagSelect: React.FC<TagSelectProps> = ({
         };
     }, []);
 
-  const handleSelectChange = (id: number, name: string) => {
-    const selectedItem = { id, name };
+	const handleSelectChange = (id: number, name: string) => {
+		const selectedItem = { id, name };
 
-    if (!highlightedTagItems.some(item => item.id === id)) {
-      setHighlightedTagItems([...highlightedTagItems, selectedItem]);
-    }
-    setIsOpen(false); 
-  };
+		if (!highlightedTagItems.some(item => item.id === id)) {
+			setHighlightedTagItems([...highlightedTagItems, selectedItem]);
+		}
+		setIsOpen(false); 
+	};
 
-  const handleRemoveItem = (id: number) => {
-    const updatedItems = highlightedTagItems.filter(item => item.id !== id);
-    setHighlightedTagItems(updatedItems);
-  };
+	const handleRemoveItem = (id: number) => {
+		const updatedItems = highlightedTagItems.filter(item => item.id !== id);
+		setHighlightedTagItems(updatedItems);
+	};
 
-  const toggleDropdown = () => {
-      setIsOpen(!isOpen);
-  };
+	const toggleDropdown = () => {
+		setIsOpen(!isOpen);
+	};
 
-  return (
-    <div className="custom-dropdown" ref={dropdownRef}>
-    	<label htmlFor="itemsDropdown" className="label-text">Label:</label>
-      	<div className="dropdown-wrapper" onClick={toggleDropdown}>
-			<div className="selected-item">
-				{highlightedTagItems.length > 0 ? (
-					<div className="tags-container">
-						{highlightedTagItems.map(item => (
-							<span key={item.id} className="tag">
-								{item.name}
-								<button className="remove-btn" onClick={(e) => {
-									e.stopPropagation();
-									handleRemoveItem(item.id);
-								}}>
-									&times;
-								</button>
-							</span>
+  	return (
+		<div className="custom-dropdown" ref={dropdownRef}>
+			<label htmlFor="itemsDropdown" className="label-text">Label:</label>
+			<div className="dropdown-wrapper" onClick={toggleDropdown}>
+				<div className="selected-item">
+					{highlightedTagItems.length > 0 ? (
+						<div className="tags-container">
+							{highlightedTagItems.map(item => (
+								<span key={item.id} className="tag">
+									{item.name}
+									<button className="remove-btn" onClick={(e) => {
+										e.stopPropagation();
+										handleRemoveItem(item.id);
+									}}>
+										&times;
+									</button>
+								</span>
+							))}
+						</div>
+						) : (
+						<span className="placeholder">Select an item</span>
+					)}
+				</div>
+				{isOpen && (
+					<div className="dropdown-menu">
+						{items.map((item) => (
+							<div
+								key={item.id}
+								className={`dropdown-item ${
+								highlightedTagItems.some(highlighted => highlighted.id === item.id) ? 'highlighted' : ''
+								}`}
+								onClick={() => handleSelectChange(item.id, item.label)}
+							>
+								{item.label}
+							</div>
 						))}
 					</div>
-					) : (
-					<span className="placeholder">Select an item</span>
 				)}
 			</div>
-			{isOpen && (
-				<div className="dropdown-menu">
-					{items.map((item) => (
-						<div
-							key={item.id}
-							className={`dropdown-item ${
-							highlightedTagItems.some(highlighted => highlighted.id === item.id) ? 'highlighted' : ''
-							}`}
-							onClick={() => handleSelectChange(item.id, item.label)}
-						>
-							{item.label}
-						</div>
-					))}
-				</div>
-			)}
-    	</div>
-    </div>
-  );
+		</div>
+	);
 }
 
 export default TagSelect;
