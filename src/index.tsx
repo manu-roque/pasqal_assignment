@@ -2,10 +2,17 @@ import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import data from "./data.json";
 
+import SimpleSelect from "./components/SimpleSelect";
+
 import "./index.css";
 
+interface HighlightedItem {
+  id: number;
+  name: string;
+}
+
 const Root = () => {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState<HighlightedItem[]>([]);
 
   return (
     <div className="Root">
@@ -18,7 +25,7 @@ const Root = () => {
         <br />
         <div>
           {selectedItems.map((e) => (
-            <div>{JSON.stringify(e)}</div>
+            <div key={e.id}>{e.name}</div>
           ))}
         </div>
       </div>
@@ -26,6 +33,10 @@ const Root = () => {
 
       {/* TODO: Insert your component below */}
       <div className="Root__select">PUT THE COMPONENT HERE</div>
+      <SimpleSelect 
+        highlightedItems={selectedItems}
+        setHighlightedItems={setSelectedItems}
+      />
     </div>
   );
 };
