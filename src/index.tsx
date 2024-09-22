@@ -3,16 +3,31 @@ import { createRoot } from "react-dom/client";
 import data from "./data.json";
 
 import SimpleSelect from "./components/SimpleSelect";
+import TagSelect from "./components/TagSelect";
 
 import "./index.css";
+import FilteredSelect from "./components/FilteredSelect";
 
 interface HighlightedItem {
   id: number;
   name: string;
 }
 
+interface HighlightedTagItem {
+  id: number;
+  name: string;
+}
+
+interface HighlightedFilteredItem {
+  id: number;
+  name: string;
+}
+
+
 const Root = () => {
   const [selectedItems, setSelectedItems] = useState<HighlightedItem[]>([]);
+  const [tagItems, setTagItems] = useState<HighlightedTagItem[]>([]);
+  const [filteredItems, setFilteredItems] = useState<HighlightedFilteredItem[]>([]);
 
   return (
     <div className="Root">
@@ -21,10 +36,24 @@ const Root = () => {
         <h1>Multiselect</h1>
       </div>
       <div className="Root__content">
-        <div>{selectedItems.length} items selected:</div>
+        <div>simple items selected: {selectedItems.length}</div>
+        <div>tag items selected: {tagItems.length}</div>
+        <div>filtered items selected: {filteredItems.length}</div>
+
         <br />
         <div>
+          Simple Select: 
           {selectedItems.map((e) => (
+            <div key={e.id}>{e.name}</div>
+          ))}
+          <br/>
+          Tag Select: 
+          {tagItems.map((e) => (
+            <div key={e.id}>{e.name}</div>
+          ))}
+          <br/>
+          Filtered Select: 
+          {filteredItems.map((e) => (
             <div key={e.id}>{e.name}</div>
           ))}
         </div>
@@ -36,6 +65,16 @@ const Root = () => {
       <SimpleSelect 
         highlightedItems={selectedItems}
         setHighlightedItems={setSelectedItems}
+      />
+
+      <TagSelect 
+        highlightedTagItems={tagItems}
+        setHighlightedTagItems={setTagItems}
+      />
+
+      <FilteredSelect 
+        highlightedFilteredItems={filteredItems}
+        setHighlightedFilteredItems={setFilteredItems}
       />
     </div>
   );

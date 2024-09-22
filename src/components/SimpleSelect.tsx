@@ -5,7 +5,7 @@ import '../style/dropdown.css';
 interface HighlightedItem {
     id: number;
     name: string;
-  }
+}
 
 interface SimpleSelectProps {
     highlightedItems: HighlightedItem[];
@@ -40,18 +40,17 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-
     }, []);
 
-  const handleSelectChange = (id: number, name: string) => {
-    const selectedItem = { id, name };
-    setSelectedItem(selectedItem);
+    const handleSelectChange = (id: number, name: string) => {
+        const selectedItem = { id, name };
+        setSelectedItem(selectedItem);
 
-    if (!highlightedItems.some(item => item.id === id)) {
-      setHighlightedItems([...highlightedItems, selectedItem]);
-    }
-    setIsOpen(false); 
-  };
+        if (!highlightedItems.some(item => item.id === id)) {
+        setHighlightedItems([...highlightedItems, selectedItem]);
+        }
+        setIsOpen(false); 
+    };
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -59,31 +58,31 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
 
     return (
         <div className="custom-dropdown" ref={dropdownRef}>
-        <label htmlFor="itemsDropdown">Label:</label>
-        <div className="dropdown-wrapper" onClick={toggleDropdown}>
-          <div className="selected-item">
-            {selectedItem ? (
-              <span>{selectedItem.name}</span>
-            ) : (
-              <span>Select an item</span>
-            )}
-          </div>
-          {isOpen && (
-            <div className="dropdown-menu">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className={`dropdown-item ${
-                    highlightedItems.some(highlighted => highlighted.id === item.id) ? 'highlighted' : ''
-                  } ${item.id === selectedItem?.id ? 'selected' : ''}`}
-                  onClick={() => handleSelectChange(item.id, item.label)}
-                >
-                  {item.label}
+            <label htmlFor="itemsDropdown">Label:</label>
+            <div className="dropdown-wrapper" onClick={toggleDropdown}>
+                <div className="selected-item">
+                    {selectedItem ? (
+                    <span>{selectedItem.name}</span>
+                    ) : (
+                    <span>Select an item</span>
+                    )}
                 </div>
-              ))}
+                {isOpen && (
+                    <div className="dropdown-menu">
+                        {items.map((item) => (
+                            <div
+                                key={item.id}
+                                className={`dropdown-item ${
+                                    highlightedItems.some(highlighted => highlighted.id === item.id) ? 'highlighted' : ''
+                                } ${item.id === selectedItem?.id ? 'selected' : ''}`}
+                                onClick={() => handleSelectChange(item.id, item.label)}
+                            >
+                            {item.label}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
-          )}
-        </div>
       </div>
     );
 }
