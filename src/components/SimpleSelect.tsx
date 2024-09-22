@@ -47,7 +47,7 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
         setSelectedItem(selectedItem);
 
         if (!highlightedItems.some(item => item.id === id)) {
-        setHighlightedItems([...highlightedItems, selectedItem]);
+            setHighlightedItems([...highlightedItems, selectedItem]);
         }
         setIsOpen(false); 
     };
@@ -58,7 +58,7 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
 
     return (
         <div className="custom-dropdown" ref={dropdownRef}>
-            <label htmlFor="itemsDropdown" className='label-text'>Label:</label>
+            <label htmlFor="itemsDropdown" className='label-text'>Simple Label:</label>
             <div className="dropdown-wrapper" onClick={toggleDropdown}>
                 <div className="selected-item">
                     {selectedItem ? (

@@ -60,7 +60,7 @@ const TagSelect: React.FC<TagSelectProps> = ({
 
   	return (
 		<div className="custom-dropdown" ref={dropdownRef}>
-			<label htmlFor="itemsDropdown" className="label-text">Label:</label>
+			<label htmlFor="itemsDropdown" className="label-text">Tag Label:</label>
 			<div className="dropdown-wrapper" onClick={toggleDropdown}>
 				<div className="selected-item">
 					{highlightedTagItems.length > 0 ? (
